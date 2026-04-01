@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dashboard Profesional - CV ATS & Surat Lamaran</title>
+    <title>Dashboard Profesional - CV ATS & Surat Administrasi</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
@@ -237,56 +237,66 @@
           >
             <i class="fa-solid fa-chart-line w-5"></i> Dashboard
           </button>
-          <div
-            class="pt-4 pb-2 text-xs font-semibold text-blue-300 uppercase tracking-wider"
-          >
+          
+          <div class="pt-4 pb-2 text-xs font-semibold text-blue-300 uppercase tracking-wider">
             Modul CV
           </div>
           <button
-            onclick="
-              switchView('add-cv');
-              resetCVForm();
-            "
+            onclick="switchView('add-cv'); resetCVForm();"
             class="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-secondary transition-colors text-left menu-btn"
             id="menu-add-cv"
           >
             <i class="fa-solid fa-file-circle-plus w-5"></i> Tambah CV Baru
           </button>
           <button
-            onclick="
-              switchView('history-cv');
-              renderCVHistory();
-            "
+            onclick="switchView('history-cv'); renderCVHistory();"
             class="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-secondary transition-colors text-left menu-btn"
             id="menu-history-cv"
           >
             <i class="fa-solid fa-folder-open w-5"></i> Riwayat CV
           </button>
 
-          <div
-            class="pt-4 pb-2 text-xs font-semibold text-blue-300 uppercase tracking-wider"
-          >
+          <div class="pt-4 pb-2 text-xs font-semibold text-blue-300 uppercase tracking-wider">
             Modul Lamaran
           </div>
           <button
-            onclick="
-              switchView('add-letter');
-              resetLetterForm();
-            "
+            onclick="switchView('add-letter'); resetLetterForm();"
             class="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-secondary transition-colors text-left menu-btn"
             id="menu-add-letter"
           >
             <i class="fa-solid fa-envelope-open-text w-5"></i> Buat Lamaran
           </button>
           <button
-            onclick="
-              switchView('history-letter');
-              renderLetterHistory();
-            "
+            onclick="switchView('history-letter'); renderLetterHistory();"
             class="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-secondary transition-colors text-left menu-btn"
             id="menu-history-letter"
           >
             <i class="fa-solid fa-inbox w-5"></i> Riwayat Lamaran
+          </button>
+
+          <div class="pt-4 pb-2 text-xs font-semibold text-blue-300 uppercase tracking-wider">
+            Modul Administrasi
+          </div>
+          <button
+            onclick="switchView('add-leave'); resetLeaveForm();"
+            class="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-secondary transition-colors text-left menu-btn"
+            id="menu-add-leave"
+          >
+            <i class="fa-solid fa-calendar-minus w-5"></i> Surat Cuti
+          </button>
+          <button
+            onclick="switchView('add-resign'); resetResignForm();"
+            class="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-secondary transition-colors text-left menu-btn"
+            id="menu-add-resign"
+          >
+            <i class="fa-solid fa-door-open w-5"></i> Surat Resign
+          </button>
+          <button
+            onclick="switchView('history-other'); renderOtherHistory();"
+            class="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-secondary transition-colors text-left menu-btn"
+            id="menu-history-other"
+          >
+            <i class="fa-solid fa-folder-tree w-5"></i> Riwayat Surat
           </button>
         </nav>
         <div
@@ -316,7 +326,7 @@
         <div class="flex-1 overflow-y-auto p-8 relative">
           <div id="view-dashboard" class="view-section hidden-view">
             <div
-              class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8"
+              class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8"
             >
               <div
                 class="bg-tertiary rounded-xl p-6 shadow-md border-l-4 border-primary"
@@ -340,9 +350,7 @@
               >
                 <div class="flex justify-between items-center">
                   <div>
-                    <p class="text-sm text-gray-500 mb-1">
-                      Total Surat Lamaran
-                    </p>
+                    <p class="text-sm text-gray-500 mb-1">Total Surat Lamaran</p>
                     <h3
                       class="text-3xl font-bold text-secondary"
                       id="stat-letter"
@@ -357,6 +365,26 @@
                   </div>
                 </div>
               </div>
+              <div
+                class="bg-tertiary rounded-xl p-6 shadow-md border-l-4 border-green-500"
+              >
+                <div class="flex justify-between items-center">
+                  <div>
+                    <p class="text-sm text-gray-500 mb-1">Total Surat Administrasi</p>
+                    <h3
+                      class="text-3xl font-bold text-green-500"
+                      id="stat-other"
+                    >
+                      0
+                    </h3>
+                  </div>
+                  <div
+                    class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center text-green-500 text-xl"
+                  >
+                    <i class="fa-solid fa-file-lines"></i>
+                  </div>
+                </div>
+              </div>
             </div>
 
             <div class="bg-tertiary rounded-xl shadow-md p-6">
@@ -365,9 +393,9 @@
               </h3>
               <p class="text-gray-600 mb-4 text-justify">
                 Aplikasi ini dirancang khusus untuk menghasilkan CV berstandar
-                ATS (Applicant Tracking System) dan Surat Lamaran Kerja
-                profesional. Data Anda disimpan secara aman di penyimpanan lokal
-                (Local Storage) browser Anda.
+                ATS (Applicant Tracking System) serta berbagai Surat Administrasi 
+                profesional secara instan. Data Anda disimpan secara aman di 
+                penyimpanan lokal (Local Storage) browser perangkat Anda.
               </p>
               <div class="flex gap-4">
                 <button
@@ -732,7 +760,6 @@
                           oninput="updateLetterPreview()"
                         />
                       </div>
-
                       <div>
                         <label class="block text-sm font-medium mb-1"
                           >Perihal *</label
@@ -766,7 +793,6 @@
                           placeholder="HRD Manager PT Teknologi Gemilang"
                         />
                       </div>
-                      
                       <div class="col-span-2">
                         <label class="block text-sm font-medium mb-1"
                           >Alamat Jl dan Nomor *</label
@@ -992,6 +1018,212 @@
               </div>
             </div>
           </div>
+
+          <div id="view-add-leave" class="view-section hidden-view h-full">
+            <div class="flex flex-col lg:flex-row gap-6 h-full">
+              <div class="w-full lg:w-1/2 bg-tertiary rounded-xl shadow-md flex flex-col h-full overflow-hidden border border-gray-200">
+                <div class="p-4 bg-gray-50 border-b flex justify-between items-center">
+                  <h3 class="font-bold text-primary">Formulir Surat Cuti</h3>
+                  <button onclick="saveOtherLetter('leave')" class="bg-primary text-tertiary px-4 py-1.5 rounded text-sm hover:bg-blue-800 transition">
+                    <i class="fa-solid fa-save mr-1"></i> Simpan Data
+                  </button>
+                </div>
+                <div class="p-6 overflow-y-auto flex-1 space-y-6" id="leave-form-container">
+                  <input type="hidden" id="lv-id" />
+
+                  <section>
+                    <h4 class="text-lg font-bold text-secondary border-b border-orange-200 pb-2 mb-4">A. Header & Tujuan</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <label class="block text-sm font-medium mb-1">Tanggal Pembuatan *</label>
+                        <input type="date" id="lv-date-input" class="w-full border rounded p-2 text-sm" oninput="updateLeavePreview()" />
+                      </div>
+                      <div>
+                        <label class="block text-sm font-medium mb-1">Kota/Kab *</label>
+                        <input type="text" id="lv-city" class="w-full border rounded p-2 text-sm" oninput="updateLeavePreview()" placeholder="Jakarta" />
+                      </div>
+                      <div class="col-span-2">
+                        <label class="block text-sm font-medium mb-1">Ditujukan Ke (Yth.) *</label>
+                        <input type="text" id="lv-to" class="w-full border rounded p-2 text-sm" oninput="updateLeavePreview()" placeholder="HRD Manager / Atasan" />
+                      </div>
+                      <div class="col-span-2">
+                        <label class="block text-sm font-medium mb-1">Nama Perusahaan *</label>
+                        <input type="text" id="lv-company" class="w-full border rounded p-2 text-sm" oninput="updateLeavePreview()" placeholder="PT Teknologi Gemilang" />
+                      </div>
+                    </div>
+                  </section>
+
+                  <section>
+                    <h4 class="text-lg font-bold text-secondary border-b border-orange-200 pb-2 mb-4">B. Data Karyawan</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div class="col-span-2">
+                        <label class="block text-sm font-medium mb-1">Nama Lengkap *</label>
+                        <input type="text" id="lv-name" class="w-full border rounded p-2 text-sm" oninput="updateLeavePreview()" placeholder="Jhon Doe" />
+                      </div>
+                      <div>
+                        <label class="block text-sm font-medium mb-1">NIK / ID Karyawan *</label>
+                        <input type="text" id="lv-nik" class="w-full border rounded p-2 text-sm" oninput="updateLeavePreview()" placeholder="123456789" />
+                      </div>
+                      <div>
+                        <label class="block text-sm font-medium mb-1">Jabatan *</label>
+                        <input type="text" id="lv-position" class="w-full border rounded p-2 text-sm" oninput="updateLeavePreview()" placeholder="Software Engineer" />
+                      </div>
+                      <div class="col-span-2">
+                        <label class="block text-sm font-medium mb-1">Divisi / Departemen *</label>
+                        <input type="text" id="lv-department" class="w-full border rounded p-2 text-sm" oninput="updateLeavePreview()" placeholder="Information Technology" />
+                      </div>
+                    </div>
+                  </section>
+
+                  <section>
+                    <h4 class="text-lg font-bold text-secondary border-b border-orange-200 pb-2 mb-4">C. Detail Cuti</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <label class="block text-sm font-medium mb-1">Tanggal Mulai Cuti *</label>
+                        <input type="date" id="lv-start" class="w-full border rounded p-2 text-sm" oninput="updateLeavePreview()" />
+                      </div>
+                      <div>
+                        <label class="block text-sm font-medium mb-1">Tanggal Selesai Cuti *</label>
+                        <input type="date" id="lv-end" class="w-full border rounded p-2 text-sm" oninput="updateLeavePreview()" />
+                      </div>
+                      <div class="col-span-2">
+                        <label class="block text-sm font-medium mb-1">Alasan Cuti *</label>
+                        <textarea id="lv-reason" class="w-full border rounded p-2 text-sm h-24" oninput="updateLeavePreview()" placeholder="Keperluan keluarga di luar kota..."></textarea>
+                      </div>
+                    </div>
+                  </section>
+                  <br />
+                </div>
+              </div>
+
+              <div class="w-full lg:w-1/2 flex flex-col h-full relative">
+                <div class="flex justify-between items-center mb-2 px-2">
+                  <h3 class="font-bold text-gray-700">
+                    <i class="fa-solid fa-eye text-primary"></i> Live Preview A4
+                  </h3>
+                  <button
+                    onclick="downloadPDF('preview-leave-a4', 'Surat_Cuti')"
+                    class="bg-secondary hover:bg-orange-600 text-tertiary px-4 py-2 rounded-lg font-medium shadow-md transition-all text-sm"
+                  >
+                    <i class="fa-solid fa-print mr-1"></i> Cetak / PDF
+                  </button>
+                </div>
+                <div class="preview-wrapper flex-1 bg-gray-200 p-4 rounded-xl shadow-inner border border-gray-300">
+                  <div id="preview-leave-a4" class="a4-container"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="view-add-resign" class="view-section hidden-view h-full">
+            <div class="flex flex-col lg:flex-row gap-6 h-full">
+              <div class="w-full lg:w-1/2 bg-tertiary rounded-xl shadow-md flex flex-col h-full overflow-hidden border border-gray-200">
+                <div class="p-4 bg-gray-50 border-b flex justify-between items-center">
+                  <h3 class="font-bold text-primary">Formulir Surat Resign</h3>
+                  <button onclick="saveOtherLetter('resign')" class="bg-primary text-tertiary px-4 py-1.5 rounded text-sm hover:bg-blue-800 transition">
+                    <i class="fa-solid fa-save mr-1"></i> Simpan Data
+                  </button>
+                </div>
+                <div class="p-6 overflow-y-auto flex-1 space-y-6" id="resign-form-container">
+                  <input type="hidden" id="rs-id" />
+
+                  <section>
+                    <h4 class="text-lg font-bold text-secondary border-b border-orange-200 pb-2 mb-4">A. Header & Tujuan</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <label class="block text-sm font-medium mb-1">Tanggal Pembuatan *</label>
+                        <input type="date" id="rs-date-input" class="w-full border rounded p-2 text-sm" oninput="updateResignPreview()" />
+                      </div>
+                      <div>
+                        <label class="block text-sm font-medium mb-1">Kota/Kab *</label>
+                        <input type="text" id="rs-city" class="w-full border rounded p-2 text-sm" oninput="updateResignPreview()" placeholder="Jakarta" />
+                      </div>
+                      <div class="col-span-2">
+                        <label class="block text-sm font-medium mb-1">Ditujukan Ke (Yth.) *</label>
+                        <input type="text" id="rs-to" class="w-full border rounded p-2 text-sm" oninput="updateResignPreview()" placeholder="HRD Manager / Pimpinan" />
+                      </div>
+                      <div class="col-span-2">
+                        <label class="block text-sm font-medium mb-1">Nama Perusahaan *</label>
+                        <input type="text" id="rs-company" class="w-full border rounded p-2 text-sm" oninput="updateResignPreview()" placeholder="PT Teknologi Gemilang" />
+                      </div>
+                    </div>
+                  </section>
+
+                  <section>
+                    <h4 class="text-lg font-bold text-secondary border-b border-orange-200 pb-2 mb-4">B. Data Karyawan</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div class="col-span-2">
+                        <label class="block text-sm font-medium mb-1">Nama Lengkap *</label>
+                        <input type="text" id="rs-name" class="w-full border rounded p-2 text-sm" oninput="updateResignPreview()" placeholder="Jhon Doe" />
+                      </div>
+                      <div>
+                        <label class="block text-sm font-medium mb-1">Jabatan *</label>
+                        <input type="text" id="rs-position" class="w-full border rounded p-2 text-sm" oninput="updateResignPreview()" placeholder="Software Engineer" />
+                      </div>
+                      <div>
+                        <label class="block text-sm font-medium mb-1">Divisi / Departemen *</label>
+                        <input type="text" id="rs-department" class="w-full border rounded p-2 text-sm" oninput="updateResignPreview()" placeholder="Information Technology" />
+                      </div>
+                    </div>
+                  </section>
+
+                  <section>
+                    <h4 class="text-lg font-bold text-secondary border-b border-orange-200 pb-2 mb-4">C. Detail Resign</h4>
+                    <div class="space-y-4">
+                      <div>
+                        <label class="block text-sm font-medium mb-1">Tanggal Efektif Resign *</label>
+                        <input type="date" id="rs-effective" class="w-full border rounded p-2 text-sm" oninput="updateResignPreview()" />
+                      </div>
+                      <div>
+                        <label class="block text-sm font-medium mb-1">Paragraf Tambahan / Ucapan Terima Kasih (Opsional)</label>
+                        <textarea id="rs-reason" class="w-full border rounded p-2 text-sm h-32" oninput="updateResignPreview()" placeholder="Saya mengucapkan banyak terima kasih atas kesempatan yang telah diberikan..."></textarea>
+                      </div>
+                    </div>
+                  </section>
+                  <br />
+                </div>
+              </div>
+
+              <div class="w-full lg:w-1/2 flex flex-col h-full relative">
+                <div class="flex justify-between items-center mb-2 px-2">
+                  <h3 class="font-bold text-gray-700">
+                    <i class="fa-solid fa-eye text-primary"></i> Live Preview A4
+                  </h3>
+                  <button
+                    onclick="downloadPDF('preview-resign-a4', 'Surat_Resign')"
+                    class="bg-secondary hover:bg-orange-600 text-tertiary px-4 py-2 rounded-lg font-medium shadow-md transition-all text-sm"
+                  >
+                    <i class="fa-solid fa-print mr-1"></i> Cetak / PDF
+                  </button>
+                </div>
+                <div class="preview-wrapper flex-1 bg-gray-200 p-4 rounded-xl shadow-inner border border-gray-300">
+                  <div id="preview-resign-a4" class="a4-container"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="view-history-other" class="view-section hidden-view">
+            <div class="bg-tertiary rounded-xl shadow-md overflow-hidden">
+              <div class="p-6 border-b border-gray-200 flex justify-between items-center">
+                <h3 class="text-lg font-bold text-primary">Database Surat Administrasi Tersimpan</h3>
+              </div>
+              <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                  <thead>
+                    <tr class="bg-gray-100 text-gray-700 text-sm">
+                      <th class="p-4 border-b">Nama Karyawan</th>
+                      <th class="p-4 border-b">Jenis Surat</th>
+                      <th class="p-4 border-b">Waktu Disimpan</th>
+                      <th class="p-4 border-b">Aksi</th>
+                    </tr>
+                  </thead>
+                  <tbody id="table-body-other" class="text-sm"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
         </div>
       </main>
     </div>
@@ -1008,18 +1240,24 @@
         "history-cv",
         "add-letter",
         "history-letter",
+        "add-leave",
+        "add-resign",
+        "history-other"
       ];
       
       let cvData = [];
       let letterData = [];
+      let otherLetterData = [];
       
       try {
           cvData = JSON.parse(localStorage.getItem("progen_cvs")) || [];
           letterData = JSON.parse(localStorage.getItem("progen_letters")) || [];
+          otherLetterData = JSON.parse(localStorage.getItem("progen_other_letters")) || [];
       } catch (e) {
           console.error("Gagal memuat database lokal, melakukan reset:", e);
           cvData = [];
           letterData = [];
+          otherLetterData = [];
       }
 
       let currentProfilePic = "";
@@ -1102,6 +1340,8 @@
 
         updateCVPreview();
         updateLetterPreview();
+        updateLeavePreview();
+        updateResignPreview();
 
         switchView("dashboard");
       }
@@ -1121,11 +1361,14 @@
           ?.classList.add("bg-secondary");
 
         const titles = {
-          dashboard: "Dashboard",
+          "dashboard": "Dashboard",
           "add-cv": "Formulir Generator CV ATS",
           "history-cv": "Riwayat CV",
           "add-letter": "Formulir Generator Surat Lamaran",
           "history-letter": "Riwayat Surat Lamaran",
+          "add-leave": "Formulir Generator Surat Cuti",
+          "add-resign": "Formulir Generator Surat Resign",
+          "history-other": "Riwayat Surat Administrasi"
         };
         document.getElementById("page-title").innerText = titles[viewId];
       }
@@ -1133,6 +1376,9 @@
       function updateDashboardStats() {
         document.getElementById("stat-cv").innerText = cvData.length;
         document.getElementById("stat-letter").innerText = letterData.length;
+        if(document.getElementById("stat-other")) {
+            document.getElementById("stat-other").innerText = otherLetterData.length;
+        }
       }
 
       function generateId() {
@@ -1404,12 +1650,9 @@
         const preview = document.getElementById("preview-cv-a4");
 
         const name = document.getElementById("cv-name").value || "NAMA LENGKAP";
-        const phone =
-          document.getElementById("cv-phone").value || "08XXXXXXXXXX";
-        const email =
-          document.getElementById("cv-email").value || "email@domain.com";
-        const address =
-          document.getElementById("cv-address").value || "Kecamatan, Kota";
+        const phone = document.getElementById("cv-phone").value || "08XXXXXXXXXX";
+        const email = document.getElementById("cv-email").value || "email@domain.com";
+        const address = document.getElementById("cv-address").value || "Kecamatan, Kota";
         const linkedin = document.getElementById("cv-linkedin").value;
         const portfolio = document.getElementById("cv-portfolio").value;
 
@@ -1684,12 +1927,6 @@
           .join("");
       }
 
-      /* Komentar Profesional:
-         Logika pembentukan teks Surat Lamaran telah direstrukturisasi.
-         Tabel data diri telah dihapus secara komplit dan diganti menggunakan tag list bullet (ul & li).
-         Sistem memotong 'p1Raw' dan menempelkan instruksi peryataan secara presisi di baris terakhir,
-         menyatu sebagai sebuah paragraf sebelum rincian data diri disajikan.
-      */
       function updateLetterPreview() {
         const preview = document.getElementById("preview-letter-a4");
 
@@ -1724,9 +1961,9 @@
 
         let p1Lines = p1Raw.split("\n").filter((l) => l.trim() !== "");
         if (p1Lines.length > 0) {
-            p1Lines[p1Lines.length - 1] += " Saya yang bertanda tangan di bawah ini:";
+            p1Lines[p1Lines.length - 1] += " Yang bertanda tangan di bawah ini:";
         } else {
-            p1Lines.push("Saya yang bertanda tangan di bawah ini:");
+            p1Lines.push("Yang bertanda tangan di bawah ini:");
         }
         const formattedP1 = p1Lines.map(line => `<p style="margin-bottom: 12px; text-align: justify;">${line}</p>`).join("");
 
@@ -1862,7 +2099,377 @@
         `;
       }
 
-      // --- 5. CRUD CV ---
+      // --- 5. LOGIKA SURAT CUTI & RESIGN (MODUL ADMINISTRASI) ---
+      function updateLeavePreview() {
+        const preview = document.getElementById("preview-leave-a4");
+
+        const cityStr = document.getElementById("lv-city").value || "[Kota]";
+        const dateInputVal = document.getElementById("lv-date-input").value;
+        let dateStr = "[Tanggal]";
+        if (dateInputVal) {
+          const d = new Date(dateInputVal);
+          dateStr = d.toLocaleDateString("id-ID", { year: "numeric", month: "long", day: "numeric" });
+        }
+        const headerDate = `${cityStr}, ${dateStr}`;
+
+        const to = document.getElementById("lv-to").value || "[Nama Tujuan / Atasan]";
+        const company = document.getElementById("lv-company").value || "[Nama Perusahaan]";
+        const name = document.getElementById("lv-name").value || "[Nama Karyawan]";
+        const nik = document.getElementById("lv-nik").value || "[NIK / ID Karyawan]";
+        const position = document.getElementById("lv-position").value || "[Jabatan]";
+        const department = document.getElementById("lv-department").value || "[Divisi/Departemen]";
+        
+        let startStr = "[Mulai]";
+        const startVal = document.getElementById("lv-start").value;
+        if(startVal) startStr = new Date(startVal).toLocaleDateString("id-ID", { year: "numeric", month: "long", day: "numeric" });
+        
+        let endStr = "[Selesai]";
+        const endVal = document.getElementById("lv-end").value;
+        if(endVal) endStr = new Date(endVal).toLocaleDateString("id-ID", { year: "numeric", month: "long", day: "numeric" });
+        
+        const reason = document.getElementById("lv-reason").value || "[Alasan Cuti]";
+
+        const html = `
+            <div class="cl-header">${headerDate}</div>
+            <div class="cl-recipient">
+                Hal : <b>Permohonan Cuti Kerja</b><br>
+                Lampiran : -<br><br>
+                Kepada Yth.<br><b>${to}</b><br>${company}
+            </div>
+            <div class="cl-body">
+                <p style="margin-bottom: 12px;">Dengan hormat,</p>
+                <p style="margin-bottom: 12px; text-align: justify;">Yang bertanda tangan di bawah ini:</p>
+                <ul style="margin-left: 20px; padding-left: 20px; list-style-type: disc; margin-bottom: 12px;">
+                    <li style="margin-bottom: 4px;">Nama: ${name}</li>
+                    <li style="margin-bottom: 4px;">NIK / ID Karyawan: ${nik}</li>
+                    <li style="margin-bottom: 4px;">Jabatan: ${position}</li>
+                    <li style="margin-bottom: 4px;">Divisi / Departemen: ${department}</li>
+                </ul>
+                <p style="margin-bottom: 12px; text-align: justify;">
+                    Melalui surat ini, saya bermaksud untuk mengajukan permohonan cuti kerja terhitung mulai tanggal <b>${startStr}</b> sampai dengan <b>${endStr}</b>. 
+                    Adapun alasan dari pengajuan permohonan cuti ini adalah karena <b>${reason}</b>.
+                </p>
+                <p style="margin-bottom: 12px; text-align: justify;">
+                    Demikian surat permohonan cuti ini saya sampaikan. Atas perhatian, kebijaksanaan, dan izin yang diberikan oleh Bapak/Ibu, saya ucapkan terima kasih.
+                </p>
+            </div>
+            <div class="cl-signature">
+                Hormat saya,<br><br><br><br><b>${name}</b>
+            </div>
+        `;
+        preview.innerHTML = html;
+      }
+
+      function updateResignPreview() {
+        const preview = document.getElementById("preview-resign-a4");
+
+        const cityStr = document.getElementById("rs-city").value || "[Kota]";
+        const dateInputVal = document.getElementById("rs-date-input").value;
+        let dateStr = "[Tanggal]";
+        if (dateInputVal) {
+          const d = new Date(dateInputVal);
+          dateStr = d.toLocaleDateString("id-ID", { year: "numeric", month: "long", day: "numeric" });
+        }
+        const headerDate = `${cityStr}, ${dateStr}`;
+
+        const to = document.getElementById("rs-to").value || "[Nama Tujuan / Pimpinan]";
+        const company = document.getElementById("rs-company").value || "[Nama Perusahaan]";
+        const name = document.getElementById("rs-name").value || "[Nama Karyawan]";
+        const position = document.getElementById("rs-position").value || "[Jabatan]";
+        const department = document.getElementById("rs-department").value || "[Divisi/Departemen]";
+        
+        let effectiveStr = "[Tanggal Resign]";
+        const effectiveVal = document.getElementById("rs-effective").value;
+        if(effectiveVal) effectiveStr = new Date(effectiveVal).toLocaleDateString("id-ID", { year: "numeric", month: "long", day: "numeric" });
+        
+        const reason = document.getElementById("rs-reason").value;
+
+        const html = `
+            <div class="cl-header">${headerDate}</div>
+            <div class="cl-recipient">
+                Kepada Yth.<br><b>${to}</b><br>${company}
+            </div>
+            <div class="cl-body">
+                <p style="margin-bottom: 12px;">Dengan hormat,</p>
+                <p style="margin-bottom: 12px; text-align: justify;">Melalui surat ini, saya yang bertanda tangan di bawah ini:</p>
+                <ul style="margin-left: 20px; padding-left: 20px; list-style-type: disc; margin-bottom: 12px;">
+                    <li style="margin-bottom: 4px;">Nama: ${name}</li>
+                    <li style="margin-bottom: 4px;">Jabatan: ${position}</li>
+                    <li style="margin-bottom: 4px;">Divisi / Departemen: ${department}</li>
+                </ul>
+                <p style="margin-bottom: 12px; text-align: justify;">
+                    Bermaksud untuk menyampaikan permohonan pengunduran diri dari posisi <b>${position}</b> di perusahaan ini, terhitung efektif sejak tanggal <b>${effectiveStr}</b>.
+                </p>
+                ${generateParagraphs(reason)}
+                <p style="margin-bottom: 12px; text-align: justify;">
+                    Demikian surat pengunduran diri ini saya buat dengan kesadaran penuh dan tanpa paksaan dari pihak mana pun. Saya berharap perusahaan terus berkembang dan meraih kesuksesan yang lebih besar di masa mendatang.
+                </p>
+            </div>
+            <div class="cl-signature">
+                Hormat saya,<br><br><br><br><b>${name}</b>
+            </div>
+        `;
+        preview.innerHTML = html;
+      }
+
+      function buildSavedLeaveHTML(form) {
+        const cityStr = form.city || "[Kota]";
+        let dateStr = "[Tanggal]";
+        if (form.dateInput) {
+          dateStr = new Date(form.dateInput).toLocaleDateString("id-ID", { year: "numeric", month: "long", day: "numeric" });
+        }
+        const headerDate = `${cityStr}, ${dateStr}`;
+
+        const to = form.to || "[Nama Tujuan / Atasan]";
+        const company = form.company || "[Nama Perusahaan]";
+        const name = form.name || "[Nama Karyawan]";
+        const nik = form.nik || "[NIK / ID Karyawan]";
+        const position = form.position || "[Jabatan]";
+        const department = form.department || "[Divisi/Departemen]";
+        
+        let startStr = "[Mulai]";
+        if(form.start) startStr = new Date(form.start).toLocaleDateString("id-ID", { year: "numeric", month: "long", day: "numeric" });
+        let endStr = "[Selesai]";
+        if(form.end) endStr = new Date(form.end).toLocaleDateString("id-ID", { year: "numeric", month: "long", day: "numeric" });
+        const reason = form.reason || "[Alasan Cuti]";
+
+        return `
+            <div class="cl-header">${headerDate}</div>
+            <div class="cl-recipient">
+                Hal : <b>Permohonan Cuti Kerja</b><br>Lampiran : -<br><br>
+                Kepada Yth.<br><b>${to}</b><br>${company}
+            </div>
+            <div class="cl-body">
+                <p style="margin-bottom: 12px;">Dengan hormat,</p>
+                <p style="margin-bottom: 12px; text-align: justify;">Yang bertanda tangan di bawah ini:</p>
+                <ul style="margin-left: 20px; padding-left: 20px; list-style-type: disc; margin-bottom: 12px;">
+                    <li style="margin-bottom: 4px;">Nama: ${name}</li>
+                    <li style="margin-bottom: 4px;">NIK / ID Karyawan: ${nik}</li>
+                    <li style="margin-bottom: 4px;">Jabatan: ${position}</li>
+                    <li style="margin-bottom: 4px;">Divisi / Departemen: ${department}</li>
+                </ul>
+                <p style="margin-bottom: 12px; text-align: justify;">
+                    Melalui surat ini, saya bermaksud untuk mengajukan permohonan cuti kerja terhitung mulai tanggal <b>${startStr}</b> sampai dengan <b>${endStr}</b>. 
+                    Adapun alasan dari pengajuan permohonan cuti ini adalah karena <b>${reason}</b>.
+                </p>
+                <p style="margin-bottom: 12px; text-align: justify;">
+                    Demikian surat permohonan cuti ini saya sampaikan. Atas perhatian, kebijaksanaan, dan izin yang diberikan oleh Bapak/Ibu, saya ucapkan terima kasih.
+                </p>
+            </div>
+            <div class="cl-signature">
+                Hormat saya,<br><br><br><br><b>${name}</b>
+            </div>
+        `;
+      }
+
+      function buildSavedResignHTML(form) {
+        const cityStr = form.city || "[Kota]";
+        let dateStr = "[Tanggal]";
+        if (form.dateInput) {
+          dateStr = new Date(form.dateInput).toLocaleDateString("id-ID", { year: "numeric", month: "long", day: "numeric" });
+        }
+        const headerDate = `${cityStr}, ${dateStr}`;
+
+        const to = form.to || "[Nama Tujuan / Pimpinan]";
+        const company = form.company || "[Nama Perusahaan]";
+        const name = form.name || "[Nama Karyawan]";
+        const position = form.position || "[Jabatan]";
+        const department = form.department || "[Divisi/Departemen]";
+        
+        let effectiveStr = "[Tanggal Resign]";
+        if(form.effective) effectiveStr = new Date(form.effective).toLocaleDateString("id-ID", { year: "numeric", month: "long", day: "numeric" });
+        const reason = form.reason || "";
+
+        return `
+            <div class="cl-header">${headerDate}</div>
+            <div class="cl-recipient">
+                Kepada Yth.<br><b>${to}</b><br>${company}
+            </div>
+            <div class="cl-body">
+                <p style="margin-bottom: 12px;">Dengan hormat,</p>
+                <p style="margin-bottom: 12px; text-align: justify;">Melalui surat ini, saya yang bertanda tangan di bawah ini:</p>
+                <ul style="margin-left: 20px; padding-left: 20px; list-style-type: disc; margin-bottom: 12px;">
+                    <li style="margin-bottom: 4px;">Nama: ${name}</li>
+                    <li style="margin-bottom: 4px;">Jabatan: ${position}</li>
+                    <li style="margin-bottom: 4px;">Divisi / Departemen: ${department}</li>
+                </ul>
+                <p style="margin-bottom: 12px; text-align: justify;">
+                    Bermaksud untuk menyampaikan permohonan pengunduran diri dari posisi <b>${position}</b> di perusahaan ini, terhitung efektif sejak tanggal <b>${effectiveStr}</b>.
+                </p>
+                ${generateParagraphs(reason)}
+                <p style="margin-bottom: 12px; text-align: justify;">
+                    Demikian surat pengunduran diri ini saya buat dengan kesadaran penuh dan tanpa paksaan dari pihak mana pun. Saya berharap perusahaan terus berkembang dan meraih kesuksesan yang lebih besar di masa mendatang.
+                </p>
+            </div>
+            <div class="cl-signature">
+                Hormat saya,<br><br><br><br><b>${name}</b>
+            </div>
+        `;
+      }
+
+      function resetLeaveForm() {
+        document.getElementById("lv-id").value = "";
+        document.querySelectorAll("#view-add-leave input, #view-add-leave textarea").forEach((el) => (el.value = ""));
+        updateLeavePreview();
+      }
+
+      function resetResignForm() {
+        document.getElementById("rs-id").value = "";
+        document.querySelectorAll("#view-add-resign input, #view-add-resign textarea").forEach((el) => (el.value = ""));
+        updateResignPreview();
+      }
+
+      function saveOtherLetter(type) {
+          const idInput = type === 'leave' ? document.getElementById("lv-id").value : document.getElementById("rs-id").value;
+          const nameVal = type === 'leave' ? document.getElementById("lv-name").value : document.getElementById("rs-name").value;
+          
+          if (!nameVal) {
+              alert("Nama Lengkap wajib diisi!");
+              return;
+          }
+
+          let letterObj = {
+              id: idInput || generateId(),
+              type: type,
+              name: nameVal,
+              date: new Date().toISOString(),
+              form: {}
+          };
+
+          if (type === 'leave') {
+              letterObj.subject = "Surat Permohonan Cuti";
+              letterObj.form = {
+                  city: document.getElementById("lv-city").value,
+                  dateInput: document.getElementById("lv-date-input").value,
+                  to: document.getElementById("lv-to").value,
+                  company: document.getElementById("lv-company").value,
+                  name: document.getElementById("lv-name").value,
+                  nik: document.getElementById("lv-nik").value,
+                  position: document.getElementById("lv-position").value,
+                  department: document.getElementById("lv-department").value,
+                  start: document.getElementById("lv-start").value,
+                  end: document.getElementById("lv-end").value,
+                  reason: document.getElementById("lv-reason").value,
+              };
+          } else {
+              letterObj.subject = "Surat Pengunduran Diri (Resign)";
+              letterObj.form = {
+                  city: document.getElementById("rs-city").value,
+                  dateInput: document.getElementById("rs-date-input").value,
+                  to: document.getElementById("rs-to").value,
+                  company: document.getElementById("rs-company").value,
+                  name: document.getElementById("rs-name").value,
+                  position: document.getElementById("rs-position").value,
+                  department: document.getElementById("rs-department").value,
+                  effective: document.getElementById("rs-effective").value,
+                  reason: document.getElementById("rs-reason").value,
+              };
+          }
+
+          if (idInput) {
+              const idx = otherLetterData.findIndex((l) => l.id === idInput);
+              if (idx > -1) otherLetterData[idx] = letterObj;
+          } else {
+              otherLetterData.push(letterObj);
+          }
+
+          try {
+              localStorage.setItem("progen_other_letters", JSON.stringify(otherLetterData));
+              updateDashboardStats();
+              alert("Data Surat berhasil disimpan!");
+              switchView("history-other");
+              renderOtherHistory();
+          } catch (e) {
+              alert("Gagal menyimpan data. Pastikan memori cache browser Anda tidak penuh.");
+              console.error(e);
+          }
+      }
+
+      function renderOtherHistory() {
+        const tbody = document.getElementById("table-body-other");
+        tbody.innerHTML = "";
+
+        if (otherLetterData.length === 0) {
+          tbody.innerHTML = `<tr><td colspan="4" class="text-center p-4 text-gray-500">Belum ada Surat Administrasi tersimpan.</td></tr>`;
+          return;
+        }
+
+        const sortedData = [...otherLetterData].sort((a, b) => new Date(b.date) - new Date(a.date));
+
+        sortedData.forEach((item) => {
+          const tr = document.createElement("tr");
+          tr.className = "border-b hover:bg-gray-50";
+          tr.innerHTML = `
+                    <td class="p-4 font-medium text-primary">${item.name || "Tanpa Nama"}</td>
+                    <td class="p-4">${item.subject}</td>
+                    <td class="p-4">${formatDate(item.date)}</td>
+                    <td class="p-4 flex gap-2">
+                        <button onclick="downloadOtherFromHistory('${item.id}', this)" class="bg-green-100 text-green-600 px-3 py-1 rounded hover:bg-green-200 transition" title="Download"><i class="fa-solid fa-download"></i></button>
+                        <button onclick="editOtherLetter('${item.id}')" class="bg-blue-100 text-primary px-3 py-1 rounded hover:bg-blue-200 transition" title="Edit"><i class="fa-solid fa-pen"></i></button>
+                        <button onclick="deleteOtherLetter('${item.id}')" class="bg-red-100 text-red-600 px-3 py-1 rounded hover:bg-red-200 transition" title="Hapus"><i class="fa-solid fa-trash"></i></button>
+                    </td>
+                `;
+          tbody.appendChild(tr);
+        });
+      }
+
+      function editOtherLetter(id) {
+          const item = otherLetterData.find((l) => l.id === id);
+          if (!item) return;
+
+          if (item.type === 'leave') {
+              resetLeaveForm();
+              document.getElementById("lv-id").value = item.id;
+              document.getElementById("lv-city").value = item.form.city || "";
+              document.getElementById("lv-date-input").value = item.form.dateInput || "";
+              document.getElementById("lv-to").value = item.form.to || "";
+              document.getElementById("lv-company").value = item.form.company || "";
+              document.getElementById("lv-name").value = item.form.name || "";
+              document.getElementById("lv-nik").value = item.form.nik || "";
+              document.getElementById("lv-position").value = item.form.position || "";
+              document.getElementById("lv-department").value = item.form.department || "";
+              document.getElementById("lv-start").value = item.form.start || "";
+              document.getElementById("lv-end").value = item.form.end || "";
+              document.getElementById("lv-reason").value = item.form.reason || "";
+              switchView("add-leave");
+              updateLeavePreview();
+          } else {
+              resetResignForm();
+              document.getElementById("rs-id").value = item.id;
+              document.getElementById("rs-city").value = item.form.city || "";
+              document.getElementById("rs-date-input").value = item.form.dateInput || "";
+              document.getElementById("rs-to").value = item.form.to || "";
+              document.getElementById("rs-company").value = item.form.company || "";
+              document.getElementById("rs-name").value = item.form.name || "";
+              document.getElementById("rs-position").value = item.form.position || "";
+              document.getElementById("rs-department").value = item.form.department || "";
+              document.getElementById("rs-effective").value = item.form.effective || "";
+              document.getElementById("rs-reason").value = item.form.reason || "";
+              switchView("add-resign");
+              updateResignPreview();
+          }
+      }
+
+      function deleteOtherLetter(id) {
+          if (confirm("Anda yakin ingin menghapus surat ini?")) {
+              otherLetterData = otherLetterData.filter((l) => l.id !== id);
+              localStorage.setItem("progen_other_letters", JSON.stringify(otherLetterData));
+              updateDashboardStats();
+              renderOtherHistory();
+          }
+      }
+
+      function downloadOtherFromHistory(id, btnElement) {
+          const item = otherLetterData.find(l => l.id === id);
+          if (!item) return;
+          if(item.type === 'leave') {
+              executeExport(buildSavedLeaveHTML(item.form), "Surat_Cuti", item.name, btnElement);
+          } else {
+              executeExport(buildSavedResignHTML(item.form), "Surat_Resign", item.name, btnElement);
+          }
+      }
+
+      // --- 6. CRUD CV ---
       function saveCV() {
         const idInput = document.getElementById("cv-id").value;
         const cvObj = {
@@ -2054,7 +2661,7 @@
         updateCVPreview();
       }
 
-      // --- 6. CRUD COVER LETTER ---
+      // --- 7. CRUD COVER LETTER ---
       function saveLetter() {
         const idInput = document.getElementById("cl-id").value;
         const letterObj = {
@@ -2191,16 +2798,17 @@
         updateLetterPreview();
       }
 
-      // --- 7. NATIVE WINDOW.PRINT() LOGIC ---
+      // --- 8. NATIVE WINDOW.PRINT() LOGIC ---
       function downloadPDF(elementId, filenamePrefix) {
         const element = document.getElementById(elementId);
-        const nameField =
-          elementId === "preview-cv-a4"
-            ? document.getElementById("cv-name").value
-            : document.getElementById("cl-name").value;
-        const finalName = nameField
-          ? nameField.replace(/\s+/g, "_")
-          : "Document";
+        let nameField = "Document";
+        
+        if (elementId === "preview-cv-a4") nameField = document.getElementById("cv-name").value;
+        else if (elementId === "preview-letter-a4") nameField = document.getElementById("cl-name").value;
+        else if (elementId === "preview-leave-a4") nameField = document.getElementById("lv-name").value;
+        else if (elementId === "preview-resign-a4") nameField = document.getElementById("rs-name").value;
+        
+        const finalName = nameField ? nameField.replace(/\s+/g, "_") : "Document";
 
         executeExport(
           element.innerHTML,
@@ -2258,7 +2866,6 @@
         }, 300);
       }
 
-      // --- 8. INITIALIZATION ---
       window.onload = initApp;
     </script>
   </body>
