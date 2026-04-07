@@ -3,11 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PDF Merger - ProGen ATS</title>
-    
+    <title>Merge & Split PDF - ProGen ATS</title>
+
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
     <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
 
     <script>
@@ -30,13 +36,20 @@
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body class="text-gray-800 h-screen overflow-hidden">
-    
     <div id="app-layout" class="flex w-full h-full relative">
-      
-      <div id="sidebar-overlay" class="fixed inset-0 bg-gray-900 bg-opacity-50 z-40 hidden transition-opacity lg:hidden" onclick="toggleSidebar()"></div>
+      <div
+        id="sidebar-overlay"
+        class="fixed inset-0 bg-gray-900 bg-opacity-50 z-40 hidden transition-opacity lg:hidden"
+        onclick="toggleSidebar()"
+      ></div>
 
-      <aside id="sidebar" class="w-64 bg-primary text-tertiary flex flex-col shadow-xl h-full fixed inset-y-0 left-0 transform -translate-x-full lg:relative lg:translate-x-0 transition duration-300 ease-in-out z-50">
-        <div class="p-6 border-b border-blue-800 flex justify-between items-center">
+      <aside
+        id="sidebar"
+        class="w-72 bg-primary text-tertiary flex flex-col shadow-xl h-full fixed inset-y-0 left-0 transform -translate-x-full lg:relative lg:translate-x-0 transition duration-300 ease-in-out z-50"
+      >
+        <div
+          class="p-6 border-b border-blue-800 flex justify-between items-center"
+        >
           <div>
             <h1 class="text-xl md:text-2xl font-bold flex items-center gap-2">
               <i class="fa-solid fa-briefcase text-secondary"></i>
@@ -44,81 +57,187 @@
             </h1>
             <p class="text-xs text-blue-300 mt-1">Professional CV Maker</p>
           </div>
-          <button onclick="toggleSidebar()" class="lg:hidden text-blue-300 hover:text-white">
-              <i class="fa-solid fa-xmark text-xl"></i>
+          <button
+            onclick="toggleSidebar()"
+            class="lg:hidden text-blue-300 hover:text-white"
+          >
+            <i class="fa-solid fa-xmark text-xl"></i>
           </button>
         </div>
         <nav class="flex-1 p-4 space-y-2 overflow-y-auto">
-          
-          <a href="index.html" class="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-secondary transition-colors text-left menu-btn">
+          <a
+            href="index.html"
+            class="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-secondary transition-colors text-left menu-btn"
+          >
             <i class="fa-solid fa-arrow-left w-5"></i> Kembali ke Dashboard
           </a>
 
-          <div class="pt-4 pb-2 text-xs font-semibold text-blue-300 uppercase tracking-wider">
+          <div
+            class="pt-4 pb-2 text-xs font-semibold text-blue-300 uppercase tracking-wider"
+          >
             Alat Utilitas
           </div>
-          <button class="w-full flex items-center gap-3 px-4 py-3 rounded-lg bg-secondary transition-colors text-left menu-btn">
-            <i class="fa-solid fa-layer-group w-5"></i> Penggabung PDF
+          <button
+            class="w-full flex items-center gap-3 px-4 py-3 rounded-lg bg-secondary transition-colors text-left menu-btn"
+          >
+            <i class="fa-solid fa-layer-group w-5"></i> Merge dan Split PDF
           </button>
-
         </nav>
-        <div class="p-4 border-t border-blue-800 text-xs text-center text-blue-200">
+        <div
+          class="p-4 border-t border-blue-800 text-xs text-center text-blue-200"
+        >
           &copy; 2026 ProGen ATS v1.0
         </div>
       </aside>
 
-      <main class="flex-1 flex flex-col h-full bg-gray-50 overflow-hidden relative">
-        <header class="bg-tertiary shadow-sm h-16 flex items-center justify-between px-4 lg:px-8 z-10">
+      <main
+        class="flex-1 flex flex-col h-full bg-gray-50 overflow-hidden relative"
+      >
+        <header
+          class="bg-tertiary shadow-sm h-16 flex items-center justify-between px-4 lg:px-8 z-10"
+        >
           <div class="flex items-center gap-4">
-            <button onclick="toggleSidebar()" class="lg:hidden text-primary text-xl focus:outline-none">
-                <i class="fa-solid fa-bars"></i>
+            <button
+              onclick="toggleSidebar()"
+              class="lg:hidden text-primary text-xl focus:outline-none"
+            >
+              <i class="fa-solid fa-bars"></i>
             </button>
             <h2 class="text-lg lg:text-xl font-semibold text-primary">
-              Penggabung PDF (Merger)
+              Merge dan Split PDF
             </h2>
           </div>
         </header>
 
         <div class="flex-1 overflow-y-auto p-4 lg:p-8 relative">
-          
-          <div class="bg-tertiary rounded-xl shadow-md p-4 lg:p-6 mb-6">
-            <h3 class="text-lg font-bold text-primary mb-4 border-b pb-2">
-              Pilih Dokumen PDF
-            </h3>
-            <p class="text-gray-600 mb-4 text-sm lg:text-base">
-              Unggah CV PDF Anda beserta lampiran pendukung lainnya (seperti Ijazah, Sertifikat, atau Portofolio). Sistem akan menggabungkannya menjadi satu file utuh.
-            </p>
-            
-            <div class="border-2 border-dashed border-gray-300 rounded-xl p-8 text-center bg-gray-50 hover:bg-gray-100 transition-colors cursor-pointer" onclick="document.getElementById('pdf-input').click()">
-              <i class="fa-solid fa-file-pdf text-5xl text-gray-400 mb-4"></i>
-              <p class="text-gray-700 font-semibold text-lg">Klik disini untuk memilih file</p>
-              <p class="text-gray-500 text-sm mt-2">Pilih 2 file PDF atau lebih secara bersamaan</p>
-              <input type="file" id="pdf-input" accept="application/pdf" multiple class="hidden" onchange="handlePDFSelection(event)">
-            </div>
+          <div class="flex gap-2 mb-6 border-b border-gray-200 pb-px">
+            <button
+              onclick="switchTool('merge')"
+              id="tab-merge"
+              class="px-5 py-2.5 font-semibold text-sm lg:text-base rounded-t-lg bg-blue-100 text-primary transition-colors"
+            >
+              <i class="fa-solid fa-object-group mr-2"></i> Penggabung (Merge)
+            </button>
+            <button
+              onclick="switchTool('split')"
+              id="tab-split"
+              class="px-5 py-2.5 font-semibold text-sm lg:text-base rounded-t-lg text-gray-500 hover:bg-gray-100 transition-colors"
+            >
+              <i class="fa-solid fa-scissors mr-2"></i> Pemecah (Split)
+            </button>
           </div>
 
-          <div class="bg-tertiary rounded-xl shadow-md p-4 lg:p-6">
-            <div class="flex justify-between items-center border-b pb-3 mb-4">
-              <h3 class="text-lg font-bold text-primary">
-                Daftar Antrean File
+          <div id="view-merge">
+            <div class="bg-tertiary rounded-xl shadow-md p-4 lg:p-6 mb-6">
+              <h3 class="text-lg font-bold text-primary mb-4 border-b pb-2">
+                Pilih Dokumen PDF
               </h3>
-              <button onclick="mergePDFs()" id="merge-btn" class="bg-primary hover:bg-blue-800 text-tertiary px-5 py-2 rounded-lg font-medium transition-all shadow-md text-sm hidden">
-                <i class="fa-solid fa-object-group mr-2"></i> Eksekusi Penggabungan
-              </button>
+              <p class="text-gray-600 mb-4 text-sm lg:text-base">
+                Unggah CV PDF Anda beserta lampiran pendukung lainnya. Sistem
+                akan menggabungkannya menjadi satu file utuh secara berurutan.
+              </p>
+
+              <div
+                class="border-2 border-dashed border-gray-300 rounded-xl p-8 text-center bg-gray-50 hover:bg-gray-100 transition-colors cursor-pointer"
+                onclick="document.getElementById('pdf-merge-input').click()"
+              >
+                <i class="fa-solid fa-file-pdf text-5xl text-gray-400 mb-4"></i>
+                <p class="text-gray-700 font-semibold text-lg">
+                  Klik disini untuk memilih file
+                </p>
+                <p class="text-gray-500 text-sm mt-2">
+                  Pilih 2 file PDF atau lebih secara bersamaan
+                </p>
+                <input
+                  type="file"
+                  id="pdf-merge-input"
+                  accept="application/pdf"
+                  multiple
+                  class="hidden"
+                  onchange="handleMergeSelection(event)"
+                />
+              </div>
             </div>
-            
-            <div id="pdf-list" class="space-y-3">
-              <div id="empty-state" class="text-center py-8">
-                <p class="text-gray-400 italic">Belum ada file PDF yang dimasukkan ke dalam antrean.</p>
+
+            <div class="bg-tertiary rounded-xl shadow-md p-4 lg:p-6">
+              <div class="flex justify-between items-center border-b pb-3 mb-4">
+                <h3 class="text-lg font-bold text-primary">
+                  Daftar Antrean File
+                </h3>
+                <button
+                  onclick="mergePDFs()"
+                  id="merge-btn"
+                  class="bg-primary hover:bg-blue-800 text-tertiary px-5 py-2 rounded-lg font-medium transition-all shadow-md text-sm hidden"
+                >
+                  <i class="fa-solid fa-object-group mr-2"></i> Eksekusi
+                  Penggabungan
+                </button>
+              </div>
+
+              <div id="merge-list" class="space-y-3">
+                <div id="merge-empty-state" class="text-center py-8">
+                  <p class="text-gray-400 italic">
+                    Belum ada file PDF yang dimasukkan ke dalam antrean.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
 
+          <div id="view-split" class="hidden">
+            <div class="bg-tertiary rounded-xl shadow-md p-4 lg:p-6 mb-6">
+              <h3 class="text-lg font-bold text-primary mb-4 border-b pb-2">
+                Pilih Dokumen PDF Tunggal
+              </h3>
+              <p class="text-gray-600 mb-4 text-sm lg:text-base">
+                Unggah 1 file PDF yang ingin Anda ekstrak halamannya.
+              </p>
+
+              <div
+                class="border-2 border-dashed border-gray-300 rounded-xl p-8 text-center bg-gray-50 hover:bg-gray-100 transition-colors cursor-pointer"
+                onclick="document.getElementById('pdf-split-input').click()"
+              >
+                <i
+                  class="fa-solid fa-file-invoice text-5xl text-gray-400 mb-4"
+                ></i>
+                <p class="text-gray-700 font-semibold text-lg">
+                  Klik disini untuk memilih file PDF
+                </p>
+                <p class="text-gray-500 text-sm mt-2">
+                  Hanya menerima 1 file pada satu waktu
+                </p>
+                <input
+                  type="file"
+                  id="pdf-split-input"
+                  accept="application/pdf"
+                  class="hidden"
+                  onchange="handleSplitSelection(event)"
+                />
+              </div>
+            </div>
+
+            <div class="bg-tertiary rounded-xl shadow-md p-4 lg:p-6">
+              <h3 class="text-lg font-bold text-primary border-b pb-3 mb-4">
+                File Terpilih & Pengaturan Ekstraksi
+              </h3>
+
+              <div id="split-list" class="space-y-4">
+                <div id="split-empty-state" class="text-center py-8">
+                  <p class="text-gray-400 italic">
+                    Belum ada file PDF yang dipilih.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </main>
     </div>
 
-    <div id="toast-container" class="fixed bottom-5 right-5 z-[100] flex flex-col gap-3"></div>
+    <div
+      id="toast-container"
+      class="fixed bottom-5 right-5 z-[100] flex flex-col gap-3"
+    ></div>
 
     <script src="js/pdf-tools.js"></script>
   </body>
