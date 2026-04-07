@@ -1,109 +1,105 @@
 body {
-    font-family: "Inter", sans-serif;
-    background-color: #f3f4f6;
+  font-family: "Inter", sans-serif;
+  background-color: #f3f4f6;
 }
 
-/* Spesifikasi Kertas A4 */
 .a4-container {
-    width: 210mm;
-    min-height: 297mm;
-    height: auto;
-    background: white;
-    color: black;
-    padding: 20mm;
-    box-shadow:
-        0 4px 6px -1px rgba(0, 0, 0, 0.1),
-        0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    margin: 0 auto;
-    text-align: justify;
-    box-sizing: border-box;
-    position: relative;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
+  width: 210mm;
+  min-height: 297mm;
+  height: auto;
+  background: white;
+  color: black;
+  padding: 20mm;
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  margin: 0 auto;
+  text-align: justify;
+  box-sizing: border-box;
+  position: relative;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
-/* ATS Styling */
 .ats-name {
-    font-size: 16pt;
-    font-weight: bold;
-    text-align: center;
-    margin-bottom: 5px;
-    text-transform: uppercase;
-    color: #000000;
+  font-size: 16pt;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+  color: #000000;
 }
 .ats-contact {
-    font-size: 10pt;
-    text-align: center;
-    margin-bottom: 15px;
-    padding-bottom: 10px;
-    color: #000000;
+  font-size: 10pt;
+  text-align: center;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  color: #000000;
 }
 .ats-section-title {
-    font-size: 11pt;
-    font-weight: bold;
-    border-bottom: 2px solid #000000;
-    margin-top: 15px;
-    margin-bottom: 10px;
-    text-transform: uppercase;
-    color: #000000;
+  font-size: 11pt;
+  font-weight: bold;
+  border-bottom: 2px solid #000000;
+  margin-top: 15px;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  color: #000000;
 }
 .ats-item-header {
-    display: flex;
-    justify-content: space-between;
-    font-weight: bold;
-    font-size: 10pt;
-    margin-bottom: 2px;
-    color: #000000;
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  font-size: 10pt;
+  margin-bottom: 2px;
+  color: #000000;
 }
 .ats-item-sub {
-    display: flex;
-    justify-content: space-between;
-    font-style: normal;
-    font-size: 10pt;
-    margin-bottom: 5px;
-    color: #000000;
+  display: flex;
+  justify-content: space-between;
+  font-style: normal;
+  font-size: 10pt;
+  margin-bottom: 5px;
+  color: #000000;
 }
 .ats-desc {
-    font-size: 10pt;
-    text-align: justify;
-    margin-bottom: 10px;
-    color: #000000;
+  font-size: 10pt;
+  text-align: justify;
+  margin-bottom: 10px;
+  color: #000000;
 }
 .ats-desc ul {
-    list-style-type: disc;
-    padding-left: 20px;
-    margin-top: 2px;
+  list-style-type: disc;
+  padding-left: 20px;
+  margin-top: 2px;
 }
 .ats-desc li {
-    margin-bottom: 2px;
+  margin-bottom: 2px;
 }
 
-/* Cover Letter Styling */
 .cl-header {
-    text-align: right;
-    font-size: 10pt;
-    margin-bottom: 20px;
-    color: #000000;
+  text-align: right;
+  font-size: 10pt;
+  margin-bottom: 20px;
+  color: #000000;
 }
 .cl-recipient {
-    font-size: 10pt;
-    margin-bottom: 20px;
-    color: #000000;
+  font-size: 10pt;
+  margin-bottom: 20px;
+  color: #000000;
 }
 .cl-body {
-    font-size: 10pt;
-    text-align: justify;
-    line-height: 1.5;
-    margin-bottom: 15px;
-    color: #000000;
+  font-size: 10pt;
+  text-align: justify;
+  line-height: 1.5;
+  margin-bottom: 15px;
+  color: #000000;
 }
 .cl-signature {
-    margin-top: 15px;
-    font-size: 10pt;
-    color: #000000;
+  margin-top: 15px;
+  font-size: 10pt;
+  color: #000000;
 }
 
-/* Aturan CSS Mencegah Teks/Elemen Terpotong Setengah di Ujung Kertas */
 .ats-section-title,
 .ats-item-header,
 .ats-item-sub,
@@ -114,85 +110,143 @@ td,
 .cl-header,
 .cl-recipient,
 .cl-signature {
-    page-break-inside: avoid;
-    break-inside: avoid;
+  page-break-inside: avoid;
+  break-inside: avoid;
 }
 
-/* Custom Scrollbar */
 .preview-wrapper {
-    overflow: auto;
+  overflow: auto;
 }
 .preview-wrapper::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+  width: 8px;
+  height: 8px;
 }
 .preview-wrapper::-webkit-scrollbar-track {
-    background: #f1f1f1;
+  background: #f1f1f1;
 }
 .preview-wrapper::-webkit-scrollbar-thumb {
-    background: #cbd5e1;
-    border-radius: 4px;
+  background: #cbd5e1;
+  border-radius: 4px;
 }
 .preview-wrapper::-webkit-scrollbar-thumb:hover {
-    background: #94a3b8;
+  background: #94a3b8;
 }
 
 .hidden-view {
-    display: none !important;
+  display: none !important;
 }
 
-/* Animasi Toast/Snackbar Notification */
 .toast-enter {
-    animation: slideInRight 0.3s ease-out forwards;
+  animation: slideInRight 0.3s ease-out forwards;
 }
 .toast-leave {
-    animation: fadeOut 0.3s ease-in forwards;
+  animation: fadeOut 0.3s ease-in forwards;
 }
 
 @keyframes slideInRight {
-    from { transform: translateX(100%); opacity: 0; }
-    to { transform: translateX(0); opacity: 1; }
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 
 @keyframes fadeOut {
-    from { opacity: 1; }
-    to { opacity: 0; }
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
 }
 
-/* Konfigurasi Eksklusif Media Print window.print() */
+.rtf-container {
+  border: 1px solid #e5e7eb;
+  border-radius: 0.375rem;
+  overflow: hidden;
+  background-color: #ffffff;
+}
+.rtf-toolbar {
+  background-color: #f9fafb;
+  border-bottom: 1px solid #e5e7eb;
+  padding: 0.5rem;
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+.rtf-toolbar button {
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  color: #4b5563;
+  transition: all 0.2s;
+}
+.rtf-toolbar button:hover {
+  background-color: #e5e7eb;
+  color: #111827;
+}
+
+.rtf-toolbar button.rtf-active {
+  background-color: #d1d5db;
+  color: #1e3a8a;
+}
+
+.rtf-editor {
+  padding: 0.75rem;
+  outline: none;
+  font-size: 0.875rem;
+  color: #374151;
+}
+.rtf-editor:empty:before {
+  content: attr(data-placeholder);
+  color: #9ca3af;
+  pointer-events: none;
+  display: block;
+}
+.rtf-editor ul {
+  list-style-type: disc;
+  padding-left: 1.5rem;
+}
+.rtf-output ul {
+  list-style-type: disc;
+  padding-left: 1.5rem;
+}
+
 @media print {
-    body {
-        background-color: #FFFFFF !important;
-        height: auto !important;
-        overflow: visible !important;
-        margin: 0 !important;
-        padding: 0 !important;
-    }
-    
-    #app-layout {
-        display: none !important;
-    }
-    
-    #print-layout {
-        display: block !important;
-    }
-    
-    .a4-container {
-        box-shadow: none !important;
-        margin: 0 !important;
-        padding: 0 !important; 
-        width: 100% !important;
-        max-width: 100% !important;
-        min-height: auto !important;
-    }
+  body {
+    background-color: #ffffff !important;
+    height: auto !important;
+    overflow: visible !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
 
-    @page {
-        size: A4 portrait;
-        margin: 20mm;
-    }
+  #app-layout {
+    display: none !important;
+  }
 
-    * {
-        -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
-    }
+  #print-layout {
+    display: block !important;
+  }
+
+  .a4-container {
+    box-shadow: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-height: auto !important;
+  }
+
+  @page {
+    size: A4 portrait;
+    margin: 20mm;
+  }
+
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
 }
