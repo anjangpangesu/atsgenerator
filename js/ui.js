@@ -1,3 +1,9 @@
+/* Komentar Profesional:
+   ui.js menangani integrasi antarmuka dan manipulasi DOM. 
+   Pembaruan: Penambahan fungsi pengunduhan sekunder (Format DOCX) pada setiap tabel 
+   riwayat (History View) agar pengguna memiliki fleksibilitas dalam memilih format file.
+*/
+
 const views = [
   "dashboard",
   "add-cv",
@@ -12,15 +18,18 @@ const views = [
 let currentProfilePic = "";
 let currentQrCode = "";
 
+/* Algoritma Pelacak Status Editor Teks (RTF State Tracker) */
 function updateRTFToolbarState() {
   const activeContainer = document.activeElement?.closest(".rtf-container");
 
+  // Matikan indikator aktif pada seluruh tombol secara bawaan
   document
     .querySelectorAll(".rtf-toolbar button[data-command]")
     .forEach((btn) => {
       btn.classList.remove("rtf-active");
     });
 
+  // Validasi format teks aktif jika kursor atau seleksi berada di dalam container RTF
   if (activeContainer) {
     const buttons = activeContainer.querySelectorAll(
       ".rtf-toolbar button[data-command]",
@@ -36,8 +45,10 @@ function updateRTFToolbarState() {
   }
 }
 
+// 1. Jalankan saat kursor berpindah atau blok teks diseleksi (Event Bawaan)
 document.addEventListener("selectionchange", updateRTFToolbarState);
 
+// 2. Mencegah hilangnya fokus dari area editor saat tombol RTF diklik (Kunci Perbaikan)
 document.addEventListener("mousedown", (e) => {
   const rtfBtn = e.target.closest(".rtf-toolbar button[data-command]");
   if (rtfBtn) {
@@ -45,6 +56,7 @@ document.addEventListener("mousedown", (e) => {
   }
 });
 
+// 3. Eksekusi pembaruan status UI secara instan setelah tombol ditekan
 document.addEventListener("click", (e) => {
   const rtfBtn = e.target.closest(".rtf-toolbar button[data-command]");
   if (rtfBtn) {
@@ -52,6 +64,7 @@ document.addEventListener("click", (e) => {
   }
 });
 
+// --- SISTEM AUTO-SAVE DEBOUNCER ---
 let autoSaveTimerCV = null;
 function triggerAutoSaveCV() {
   clearTimeout(autoSaveTimerCV);
@@ -1200,11 +1213,13 @@ function renderCVHistory() {
   sortedCVData.forEach((cv) => {
     const tr = document.createElement("tr");
     tr.className = "border-b hover:bg-gray-50";
+    /* Penyematan tombol DOCX pada tabel Riwayat CV */
     tr.innerHTML = `
             <td class="p-3 lg:p-4 font-medium text-primary">${cv.name || "Tanpa Nama"}</td>
             <td class="p-3 lg:p-4 whitespace-nowrap">${formatDate(cv.date)}</td>
             <td class="p-3 lg:p-4 flex justify-center gap-2">
-                <button onclick="downloadCVFromHistory('${cv.id}', this)" class="bg-green-100 text-green-600 px-3 py-1 rounded hover:bg-green-200 transition" title="Download"><i class="fa-solid fa-download"></i></button>
+                <button onclick="downloadDocxCVFromHistory('${cv.id}', this)" class="bg-blue-100 text-blue-600 px-3 py-1 rounded hover:bg-blue-200 transition" title="Download Word"><i class="fa-solid fa-file-word"></i></button>
+                <button onclick="downloadCVFromHistory('${cv.id}', this)" class="bg-green-100 text-green-600 px-3 py-1 rounded hover:bg-green-200 transition" title="Download PDF"><i class="fa-solid fa-download"></i></button>
                 <button onclick="editCV('${cv.id}')" class="bg-blue-100 text-primary px-3 py-1 rounded hover:bg-blue-200 transition" title="Edit"><i class="fa-solid fa-pen"></i></button>
                 <button onclick="deleteCV('${cv.id}')" class="bg-red-100 text-red-600 px-3 py-1 rounded hover:bg-red-200 transition" title="Hapus"><i class="fa-solid fa-trash"></i></button>
             </td>
@@ -1324,12 +1339,14 @@ function renderLetterHistory() {
   sortedLetterData.forEach((cl) => {
     const tr = document.createElement("tr");
     tr.className = "border-b hover:bg-gray-50";
+    /* Penyematan tombol DOCX pada tabel Riwayat Surat Lamaran */
     tr.innerHTML = `
             <td class="p-3 lg:p-4 font-medium text-primary">${cl.name || "Tanpa Nama"}</td>
             <td class="p-3 lg:p-4">${cl.subject || "-"}</td>
             <td class="p-3 lg:p-4 whitespace-nowrap">${formatDate(cl.date)}</td>
             <td class="p-3 lg:p-4 flex justify-center gap-2">
-                <button onclick="downloadLetterFromHistory('${cl.id}', this)" class="bg-green-100 text-green-600 px-3 py-1 rounded hover:bg-green-200 transition" title="Download"><i class="fa-solid fa-download"></i></button>
+                <button onclick="downloadDocxLetterFromHistory('${cl.id}', this)" class="bg-blue-100 text-blue-600 px-3 py-1 rounded hover:bg-blue-200 transition" title="Download Word"><i class="fa-solid fa-file-word"></i></button>
+                <button onclick="downloadLetterFromHistory('${cl.id}', this)" class="bg-green-100 text-green-600 px-3 py-1 rounded hover:bg-green-200 transition" title="Download PDF"><i class="fa-solid fa-download"></i></button>
                 <button onclick="editLetter('${cl.id}')" class="bg-blue-100 text-primary px-3 py-1 rounded hover:bg-blue-200 transition" title="Edit"><i class="fa-solid fa-pen"></i></button>
                 <button onclick="deleteLetter('${cl.id}')" class="bg-red-100 text-red-600 px-3 py-1 rounded hover:bg-red-200 transition" title="Hapus"><i class="fa-solid fa-trash"></i></button>
             </td>
@@ -1397,12 +1414,14 @@ function renderOtherHistory() {
   sortedData.forEach((item) => {
     const tr = document.createElement("tr");
     tr.className = "border-b hover:bg-gray-50";
+    /* Penyematan tombol DOCX pada tabel Riwayat Surat Administrasi */
     tr.innerHTML = `
             <td class="p-3 lg:p-4 font-medium text-primary">${item.name || "Tanpa Nama"}</td>
             <td class="p-3 lg:p-4">${item.subject}</td>
             <td class="p-3 lg:p-4 whitespace-nowrap">${formatDate(item.date)}</td>
             <td class="p-3 lg:p-4 flex justify-center gap-2">
-                <button onclick="downloadOtherFromHistory('${item.id}', this)" class="bg-green-100 text-green-600 px-3 py-1 rounded hover:bg-green-200 transition" title="Download"><i class="fa-solid fa-download"></i></button>
+                <button onclick="downloadDocxOtherFromHistory('${item.id}', this)" class="bg-blue-100 text-blue-600 px-3 py-1 rounded hover:bg-blue-200 transition" title="Download Word"><i class="fa-solid fa-file-word"></i></button>
+                <button onclick="downloadOtherFromHistory('${item.id}', this)" class="bg-green-100 text-green-600 px-3 py-1 rounded hover:bg-green-200 transition" title="Download PDF"><i class="fa-solid fa-download"></i></button>
                 <button onclick="editOtherLetter('${item.id}')" class="bg-blue-100 text-primary px-3 py-1 rounded hover:bg-blue-200 transition" title="Edit"><i class="fa-solid fa-pen"></i></button>
                 <button onclick="deleteOtherLetter('${item.id}')" class="bg-red-100 text-red-600 px-3 py-1 rounded hover:bg-red-200 transition" title="Hapus"><i class="fa-solid fa-trash"></i></button>
             </td>
