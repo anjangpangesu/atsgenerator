@@ -21,6 +21,7 @@ body {
   overflow-wrap: break-word;
   font-family: Arial, Helvetica, sans-serif;
   line-height: 1.15;
+  font-size: 9pt;
 }
 
 .ats-name {
@@ -43,7 +44,7 @@ body {
   color: #000000;
 }
 .ats-section-title {
-  font-size: 9pt;
+  font-size: 12pt;
   font-weight: bold;
   border-bottom: 2px solid #000000;
   margin-top: 15px;
@@ -219,7 +220,7 @@ td,
 .rtf-editor {
   padding: 0.75rem;
   outline: none;
-  font-size: 0.875rem;
+  font-size: 9pt;
   color: #374151;
 }
 .rtf-editor:empty:before {
@@ -231,6 +232,9 @@ td,
 .rtf-editor ul {
   list-style-type: disc;
   padding-left: 1.5rem;
+}
+.rtf-output {
+  font-size: 9pt;
 }
 .rtf-output ul {
   list-style-type: disc;

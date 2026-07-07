@@ -192,8 +192,8 @@ function executeDocxExport(htmlContent, filenamePrefix, name, btn) {
         : "";
 
       table.innerHTML = `<tr>
-                <td style="text-align: left; padding: 0; vertical-align: top; ${weightStr} font-size: 10pt;">${spans[0].innerHTML}</td>
-                <td style="text-align: right; padding: 0; vertical-align: top; font-weight: bold; font-size: 10pt;">${spans[1].innerHTML}</td>
+                <td style="text-align: left; padding: 0; vertical-align: top; ${weightStr} font-size: 9pt;">${spans[0].innerHTML}</td>
+                <td style="text-align: right; padding: 0; vertical-align: top; font-weight: bold; font-size: 9pt;">${spans[1].innerHTML}</td>
             </tr>`;
       el.parentNode.replaceChild(table, el);
     }
@@ -232,11 +232,12 @@ function executeDocxExport(htmlContent, filenamePrefix, name, btn) {
         <meta charset="utf-8">
         <title>Export</title>
         <style>
-            body { font-family: "Arial", sans-serif; font-size: 10pt; color: black; }
-            .ats-name { font-size: 16pt; font-weight: bold; text-align: center; margin-bottom: 5px; text-transform: uppercase; }
-            .ats-contact { font-size: 10pt; text-align: center; margin-bottom: 15px; }
-            .ats-section-title { font-size: 11pt; font-weight: bold; border-bottom: 1pt solid black; padding-bottom: 2px; margin-top: 15px; margin-bottom: 10px; text-transform: uppercase; }
-            .ats-desc { font-size: 10pt; text-align: justify; margin-bottom: 10px; }
+            body { font-family: "Arial", sans-serif; font-size: 9pt; color: black; }
+            .ats-name { font-size: 18pt; font-weight: bold; text-align: center; margin-bottom: 5px; text-transform: uppercase; }
+            .ats-contact { font-size: 9pt; text-align: center; margin-bottom: 15px; }
+            .ats-section-title { font-size: 12pt; font-weight: bold; border-bottom: 1pt solid black; padding-bottom: 2px; margin-top: 15px; margin-bottom: 10px; text-transform: uppercase; }
+            .ats-desc { font-size: 9pt; text-align: justify; margin-bottom: 10px; }
+            .rtf-output { font-size: 9pt; }
             ul { margin-top: 0; padding-left: 20px; list-style-type: disc; }
             li { margin-bottom: 2px; }
             .cl-header { text-align: right; margin-bottom: 20px; }
