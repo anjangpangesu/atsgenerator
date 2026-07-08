@@ -244,6 +244,9 @@ function executeDocxExport(htmlContent, filenamePrefix, name, btn) {
             .cl-recipient { margin-bottom: 20px; }
             .cl-body { text-align: justify; line-height: 1.5; margin-bottom: 15px; }
             .cl-signature { margin-top: 15px; }
+            .rtf-output span, .rtf-output div, .rtf-output p, .rtf-output font,
+            .cl-content span, .cl-content div, .cl-content p, .cl-content font,
+            .ats-desc span, .ats-desc div, .ats-desc p, .ats-desc font { font-size: inherit !important; font-family: inherit !important; color: inherit !important; background-color: transparent !important; line-height: inherit; }
         </style>
     </head>
     <body>`;

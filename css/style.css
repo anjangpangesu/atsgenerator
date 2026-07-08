@@ -241,6 +241,18 @@ td,
   padding-left: 1.5rem;
 }
 
+/* Fix for inline styles injected by rich text editor when typing/pasting new lines */
+.rtf-editor span, .rtf-editor div, .rtf-editor p, .rtf-editor font,
+.rtf-output span, .rtf-output div, .rtf-output p, .rtf-output font,
+.cl-content span, .cl-content div, .cl-content p, .cl-content font,
+.ats-desc span, .ats-desc div, .ats-desc p, .ats-desc font {
+  font-size: inherit !important;
+  font-family: inherit !important;
+  color: inherit !important;
+  background-color: transparent !important;
+  line-height: inherit;
+}
+
 @media print {
   body {
     background-color: #ffffff !important;
